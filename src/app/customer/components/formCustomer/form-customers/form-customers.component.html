@@ -1,0 +1,43 @@
+<form >
+   <div class="form-group row ">
+      <!-- Customer Name -->
+      <label class="col-md-4 required" for="customerName">Customer Name</label>
+      <div class="col-md-8">
+<input [(ngModel)]="formModel.customerName" name="customerName" type="text" class="form-control" id="customerName" required>
+      </div>
+
+      <!-- Customer Address -->
+      <label class="col-md-4 required  mt-1" for="customerAddress">Customer Address</label>
+      <div class="col-md-8 mt-1">
+<input [(ngModel)]="formModel.customerAddress" name="customerAddress" type="text" class="form-control" id="customerAddress" required>
+      </div>
+
+      <!-- Customer Phone -->
+      <label class="col-md-4 required  mt-1" for="customerPhone">Customer Phone</label>
+      <div class="col-md-8  mt-1">  
+<input [(ngModel)]="formModel.customerPhone" name="customerPhone" type="text" class="form-control" id="customerPhone" required>
+      </div>
+
+      <!-- Customer PIC -->
+      <label class="col-md-4 required  mt-1" for="pic">PIC</label>
+      <div class="col-md-8  mt-1">
+<input [(ngModel)]="formModel.pic" name="pic" type="text" class="form-control" id="pic" required>
+      </div>
+
+      <!-- Customer Status -->
+      <label class="col-md-4 required  mt-1" for="isActive">Status</label>
+      <div class="col-md-8  mt-1">
+<select [(ngModel)]="formModel.isActive" name="isActive" class="form-control" id="isActive" required>
+         <option value="1">Active</option>
+         <option value="0">Inactive</option>
+
+      </select>
+  </div>
+   </div>
+   <div class="form-group row mt-2">
+      <div class="col-md-8 offset-md-4">
+          <button type="button" class="btn btn-primary" (click)="save()">Simpan</button>
+      </div>
+  </div>
+ 
+</form>

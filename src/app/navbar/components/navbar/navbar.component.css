@@ -1,0 +1,24 @@
+/* navbar.component.css */
+.toolbar-title {
+  flex: 1;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+@media (max-width: 600px) {
+  .mat-toolbar {
+    justify-content: space-between;
+  }
+
+  mat-sidenav {
+    width: 200px;
+  }
+}
+
+

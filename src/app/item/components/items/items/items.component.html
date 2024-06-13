@@ -1,0 +1,116 @@
+<div class="container-fluid mt-2">
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="card shadow-lg">
+            <div class="card-header d-flex justify-content-between">
+               <h1>Daftar Item</h1>
+               <div role="group" class="btn-group btn-group-sm btn-group-justified blocks">
+                  <button type="button" class="btn btn-sm btn-primary mr-2"(click)="createItem(formItem)">Tambah Item</button>
+               </div>
+            </div>
+            <div class="card-body d-flex flex-column">
+               <div class="table-responsive flex-grow-1">
+                  <table mat-table [dataSource]="listItems" class="mat-elevation-z8">
+                     <!-- No -->
+                     <ng-container matColumnDef="no">
+                        <th mat-header-cell *matHeaderCellDef> No </th>
+                        <td mat-cell *matCellDef="let item; let i = index"> {{getRowIndex(i)}} </td>
+                     </ng-container>
+                     <!-- Item ID Column -->
+                     <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> Item ID </th>
+                        <td mat-cell *matCellDef="let item"> {{item.itemId}} </td>
+                     </ng-container>
+                     <!-- Item Name Column -->
+                     <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Item Name </th>
+                        <td mat-cell *matCellDef="let item"> {{item.itemName}} </td>
+                     </ng-container>
+                     <!-- Item Price -->
+                     <ng-container matColumnDef="price">
+                        <th mat-header-cell *matHeaderCellDef> Item Price </th>
+                        <td mat-cell *matCellDef="let item"> {{ item.price | currency:'Rp. ':'symbol':'1.2-2' }} </td>
+                      </ng-container>
+                      
+                     <!-- Item Stock -->
+                     <ng-container matColumnDef="stock">
+                        <th mat-header-cell *matHeaderCellDef> Item Stock </th>
+                        <td mat-cell *matCellDef="let item"> {{item.stock}} </td>
+                     </ng-container>
+                     <!-- Item Code -->
+                     <ng-container matColumnDef="code">
+                        <th mat-header-cell *matHeaderCellDef> Item Code </th>
+                        <td mat-cell *matCellDef="let item"> {{item.itemCode}}
+                        </td>
+                     </ng-container>
+                     <!-- isActive -->
+                     <ng-container matColumnDef="isAvailable">
+                        <th mat-header-cell *matHeaderCellDef> Status </th>
+                        <td mat-cell *matCellDef="let item">
+                           {{ item.isAvailable ? 'Available' : 'Not Available' }}
+                        </td>
+                     </ng-container>
+                     <!-- LastOrderDate -->
+                     <ng-container matColumnDef="lastReStock">
+                        <th mat-header-cell *matHeaderCellDef> Last Re Stock </th>
+                        <td mat-cell *matCellDef="let item"> {{item.lastReStock?item.lastReStock:"-"}} </td>
+                     </ng-container>
+
+                     <!-- Actions Column -->
+                     <ng-container
+                     matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef> Actions </th>
+                      <td 
+                      mat-cell *matCellDef="let item">
+                      <div class="d-flex gap-1">
+     
+                        <button class="btn btn-sm btn-primary" (click)="updateItem(formItem,item.itemId)" >
+                          <mat-icon >edit</mat-icon>
+                        </button>
+                          <button class="btn btn-sm btn-danger " (click)="deleteItem(item.itemId)">
+                             <mat-icon>delete</mat-icon>
+                          </button>
+                           <button class="btn btn-sm btn-info "
+                           (click)="showDetail(detailItem,item.itemId)">
+                               <mat-icon>visibility</mat-icon>
+                           </button>
+                      </div>
+     
+                      </td>
+                    </ng-container>
+      
+                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+               </div>
+               <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="[8, 15, 50]" (page)="pageChanged($event)"
+               aria-label="Select page">
+             </mat-paginator>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<ng-template #formItem let-modal>
+   <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Tambah Item</h4>
+      <!-- close button -->
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+   </div>
+   <div class="modal-body">
+      <app-form-item [itemId]="modelId"(afterSave)="modal.close();reload()"></app-form-item>
+     
+   </div>
+
+ </ng-template>
+
+ <!-- detailItem -->
+   <ng-template #detailItem let-modal>
+      <div class="modal-header">
+         <!-- close button -->
+         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+      </div>
+      <div class="modal-body">
+         <app-detail-item [itemId]="modelId" ></app-detail-item>
+      </div>

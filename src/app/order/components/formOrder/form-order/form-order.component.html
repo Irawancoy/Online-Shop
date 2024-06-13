@@ -1,0 +1,28 @@
+<form>
+   <div class="form-group row ">
+      <label class="col-md-4 required" for="customerId">Customer</label>
+      <div class="col-md-8">
+         <select [(ngModel)]="formModel.customerId" name="customerId" class="form-control" id="customerId" required>
+            <option *ngFor="let customer of listCustomer" [value]="customer.customerId">{{customer.customerName}}
+            </option>
+         </select>
+      </div>
+      <label class="col-md-4 required  mt-1" for="itemId">Item</label>
+      <div class="col-md-8 mt-1">
+         <select [(ngModel)]="formModel.itemId" name="itemId" class="form-control" id="itemId" required>
+            <option *ngFor="let item of listItems" [value]="item.itemId">{{item.itemName}}</option>
+         </select>
+      </div>
+      <label class="col-md-4 required  mt-1" for="quantity">Quantity</label>
+      <div class="col-md-8  mt-1">
+         <input [(ngModel)]="formModel.quantity" name="quantity" type="text" class="form-control" id="quantity"
+            required>
+      </div>
+   </div>
+
+   <div class="form-group row mt-2">
+      <div class="col-md-8 offset-md-4">
+         <button type="button" class="btn btn-primary" (click)="save()">Simpan</button>
+      </div>
+   </div>
+</form>

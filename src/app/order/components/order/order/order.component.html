@@ -1,0 +1,119 @@
+<div class="container-fluid mt-2">
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="card shadow-lg">
+            <div class="card-header d-flex justify-content-between">
+               <h1>Daftar Order</h1>
+               <div role="group" class="btn-group btn-group-sm btn-group-justified blocks">
+                  <button type="button" class="btn btn-sm btn-success" (click)="generatePdf()">Generate Report PDF</button> 
+                  <button type="button" class="btn btn-sm btn-primary mr-2" (click)="createOrder(formOrder)">Tambah
+                     Order</button>
+                  <!-- generate pdf-->
+                 
+               </div>
+            </div>
+            <div class="card-body d-flex flex-column">
+               <div class="table-responsive flex-grow-1">
+                  <table mat-table [dataSource]="listOrders" class="mat-elevation-z8">
+                     <!-- No -->
+                     <ng-container matColumnDef="no">
+                        <th mat-header-cell *matHeaderCellDef> No </th>
+                        <td mat-cell *matCellDef="let order; let i = index"> {{getRowIndex(i)}} </td>
+                     </ng-container>
+                     <!-- Order ID Column -->
+                     <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> Order ID </th>
+                        <td mat-cell *matCellDef="let order"> {{order.orderId}} </td>
+                     </ng-container>
+                     <!-- Order Code -->
+                     <ng-container matColumnDef="code">
+                        <th mat-header-cell *matHeaderCellDef> Order Code </th>
+                        <td mat-cell *matCellDef="let order"> {{order.orderCode}} </td>
+                     </ng-container>
+                     <!-- Order Date -->
+                     <ng-container matColumnDef="orderDate">
+                        <th mat-header-cell *matHeaderCellDef> Order Date </th>
+                        <td mat-cell *matCellDef="let order"> {{order.orderDate}} </td>
+                     </ng-container>
+                     <!-- Customer Name -->
+                     <ng-container matColumnDef="customerName">
+                        <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+                        <td mat-cell *matCellDef="let order"> {{order.customer.customerName}} </td>
+                     </ng-container>
+                     <!-- Item Name -->
+                     <ng-container matColumnDef="itemName">
+                        <th mat-header-cell *matHeaderCellDef> Item Name </th>
+                        <td mat-cell *matCellDef="let order"> {{order.item.itemName}} </td>
+                     </ng-container>
+                     <!-- price -->
+                     <ng-container matColumnDef="price">
+                        <th mat-header-cell *matHeaderCellDef> Price </th>
+                        <td mat-cell *matCellDef="let order"> {{order.item.price | currency:'Rp. ':'symbol':'1.2-2'}}
+                        </td>
+                     </ng-container>
+                     <!-- Quantity -->
+                     <ng-container matColumnDef="quantity">
+                        <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                        <td mat-cell *matCellDef="let order"> {{order.quantity}} </td>
+                     </ng-container>
+                     <!-- Total Price -->
+                     <ng-container matColumnDef="total">
+                        <th mat-header-cell *matHeaderCellDef> Total Price </th>
+                        <td mat-cell *matCellDef="let order"> {{order.totalPrice | currency:'Rp. ':'symbol':'1.2-2'}}
+                        </td>
+                     </ng-container>
+
+                     <!-- Actions Column -->
+                     <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef> Actions </th>
+                        <td mat-cell *matCellDef="let order">
+                           <div class="d-flex gap-1">
+
+                              <button class="btn btn-sm btn-primary" (click)="updateOrder(formOrder,order.orderId)">
+                                 <mat-icon>edit</mat-icon>
+                              </button>
+                              <button class="btn btn-sm btn-danger " (click)="deleteOrder(order.orderId)">
+                                 <mat-icon>delete</mat-icon>
+                              </button>
+                              <button class="btn btn-sm btn-info " (click)="showDetail(detailOrder,order.orderId)">
+                                 <mat-icon>visibility</mat-icon>
+                              </button>
+                           </div>
+
+                        </td>
+                     </ng-container>
+                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+               </div>
+               <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="[8, 15, 50]"
+                  (page)="pageChanged($event)" aria-label="Select page">
+               </mat-paginator>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<ng-template #formOrder let-modal>
+   <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Tambah Item</h4>
+      <!-- close button -->
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+   </div>
+   <div class="modal-body">
+      <app-form-order [orderId]="modelId" (afterSave)="modal.close();reload()"></app-form-order>
+
+   </div>
+
+</ng-template>
+
+<ng-template #detailOrder let-modal>
+   <div class="modal-header">
+      <!-- close button -->
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+   </div>
+   <div class="modal-body
+      ">
+      <app-detail-order [orderId]="modelId"></app-detail-order>
+   </div>

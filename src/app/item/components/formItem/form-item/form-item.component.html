@@ -1,0 +1,29 @@
+<form>
+   <div class="form-group row ">
+      <label class="col-md-4 required" for="itemName">Item Name</label>
+      <div class="col-md-8">
+         <input [(ngModel)]="formModel.itemName" name="itemName" type="text" class="form-control" id="itemName" required>
+      </div>
+      <label class="col-md-4 required  mt-1" for="itemPrice">Item Price</label>
+      <div class="col-md-8 mt-1">
+         <input [(ngModel)]="formModel.price" name="itemPrice" type="text" class="form-control" id="itemPrice" required>
+      </div>
+      <label class="col-md-4 required  mt-1" for="itemStock">Item Stock</label>
+      <div class="col-md-8  mt-1">
+         <input [(ngModel)]="formModel.stock" name="itemStock" type="text" class="form-control" id="itemStock" required>
+      </div>
+      <label class="col-md-4 required  mt-1" for="isActive">Status</label>
+      <div class="col-md-8  mt-1">
+         <select [(ngModel)]="formModel.isAvailable" name="isAvailable" 
+            class="form-control" id="isActive" required>
+            <option value="1">Available</option>
+            <option value="0">Not Available</option>
+         </select>
+      </div>
+   </div>
+   <div class="form-group row mt-2">
+      <div class="col-md-8 offset-md-4">
+         <button type="button" class="btn btn-primary" (click)="save()">Simpan</button>
+      </div>
+   </div>
+</form>

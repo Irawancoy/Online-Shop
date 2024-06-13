@@ -1,0 +1,30 @@
+<div class="container">
+   <mat-card>
+      <mat-card-content>
+         <h2>Detail Order</h2>
+         <div class="d-flex">
+            <div class="me-4">
+               <h4>ID</h4>
+               <h4>Order Code</h4>
+               <h4>Order Date</h4>
+               <!-- detail Customer -->
+               <h4>Customer Name</h4>
+               <!-- detail Item -->
+               <h4>Item Name</h4>
+               <h4>Item Price</h4>
+               <h4>Quantity</h4>
+               <h4>Total Price</h4>
+            </div>
+            <div>
+               <h4> : {{detailOrder?.orderId}}</h4>
+               <h4> : {{detailOrder?.orderCode}}</h4>
+               <h4> : {{detailOrder?.orderDate}}</h4>
+               <h4> : {{detailOrder?.customer.customerName}}</h4>
+               <h4> : {{detailOrder?.item.itemName}}</h4>
+               <h4> : {{detailOrder?.item.price | currency:'Rp. ':'symbol':'1.2-2'}}</h4>
+               <h4> : {{detailOrder?.quantity}}</h4>
+               <h4> : {{detailOrder?.totalPrice | currency:'Rp. ':'symbol':'1.2-2'}}</h4>
+            </div>
+         </div>
+      </mat-card-content>
+   </mat-card>

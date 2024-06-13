@@ -1,0 +1,32 @@
+
+<div class="container">
+   <mat-card>
+     <mat-card-content>
+      <h2>Detail Customer</h2>
+      <div class="d-flex">
+         <div class="me-4">
+            <h4>ID</h4>
+            <h4>Name</h4>
+            <h4>Address</h4>
+            <h4>Code</h4>
+            <h4>Phone</h4>
+            <h4>Status</h4>
+            <h4>Last Order Date</h4>
+            <h4>PIC</h4>
+
+         </div>
+         <div>
+            <h4> : {{detailCustomer?.customerId}}</h4>
+            <h4> : {{detailCustomer?.customerName}}</h4>
+            <h4> : {{detailCustomer?.customerAddress}}</h4>
+            <h4> : {{detailCustomer?.customerCode}}</h4>
+            <h4> : {{detailCustomer?.customerPhone}}</h4>
+            <h4> : {{detailCustomer?.isActive ? 'Active' : 'Inactive'}}</h4>
+            <h4> : {{detailCustomer?.lastOrderDate?detailCustomer.lastOrderDate:"-"}}</h4>
+            <h4> : {{detailCustomer?.pic}}</h4>
+         </div>
+       </div>  
+     </mat-card-content>
+   </mat-card>
+ </div>
+ 

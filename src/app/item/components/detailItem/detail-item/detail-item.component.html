@@ -1,0 +1,27 @@
+<div class="container">
+   <mat-card>
+     <mat-card-content>
+      <h2>Detail Item</h2>
+      <div class="d-flex">
+         <div class="me-4">
+            <h4>ID</h4>
+            <h4>Name</h4>
+            <h4>Code</h4>
+            <h4>Stock</h4>
+            <h4>Price</h4>
+            <h4>Status</h4>
+            <h4>Last Re Stock</h4>
+         </div>
+         <div>
+            <h4> : {{detailItem?.itemId}}</h4>
+            <h4> : {{detailItem?.itemName}}</h4>
+            <h4> : {{detailItem?.price | currency:'Rp. ':'symbol':'1.2-2'}}</h4>
+            <h4> : {{detailItem?.stock}}</h4>
+            <h4> : {{detailItem?.itemCode}}</h4>
+            <h4> : {{detailItem?.isAvailable ? 'Available' : 'Not Available'}}</h4>
+            <h4> : {{detailItem?.lastReStock?detailItem.lastReStock:"-"}}</h4>
+         </div>
+       </div>
+       </mat-card-content>
+       </mat-card>
+       
