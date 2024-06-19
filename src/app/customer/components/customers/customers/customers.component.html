@@ -23,7 +23,16 @@
                  <th mat-header-cell *matHeaderCellDef> Customer ID </th>
                  <td mat-cell *matCellDef="let customer"> {{customer.customerId}} </td>
                </ng-container>
- 
+
+               <!-- PIC img-->
+                <ng-container matColumnDef="pic">
+                  <th mat-header-cell *matHeaderCellDef> PIC </th>
+                  <td mat-cell *matCellDef="let customer">
+                    <img [src]="customer.pic" alt="pic" class="rounded-circle" width="60" height="60">
+                  </td>
+                </ng-container>
+          
+
                <!-- Customer Name Column -->
                <ng-container matColumnDef="name">
                  <th mat-header-cell *matHeaderCellDef> Customer Name </th>
@@ -60,12 +69,6 @@
                <ng-container matColumnDef="lastOrderDate">
                  <th mat-header-cell *matHeaderCellDef> Last Order Date </th>
                  <td mat-cell *matCellDef="let customer">  {{customer?.lastOrderDate?customer.lastOrderDate:"-"}}</td>
-               </ng-container>
- 
-               <!-- pic -->
-               <ng-container matColumnDef="pic">
-                 <th mat-header-cell *matHeaderCellDef> PIC </th>
-                 <td mat-cell *matCellDef="let customer"> {{customer.pic}} </td>
                </ng-container>
  
                <!-- Actions Column -->

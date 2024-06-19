@@ -2,13 +2,15 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CustomerService } from '../../../services/customer.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-form-customers',
   standalone: true,
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   templateUrl: './form-customers.component.html',
   styleUrl: './form-customers.component.css'
@@ -19,6 +21,7 @@ export class FormCustomersComponent {
   mode: string | undefined;
   formModel: any
   requestPut: any
+  imgSrc: any
 
   constructor(
     private customerService: CustomerService,
@@ -53,7 +56,15 @@ export class FormCustomersComponent {
 
   save() {
     if (this.mode === 'add') {
-      this.customerService.postCustomer(this.formModel).subscribe((res: any) => {
+      const requestDataJson = JSON.stringify(this.formModel);
+      const data = new FormData();
+      data.append("request", new Blob([requestDataJson], {
+        type: "application/json"
+      }));
+      if (this.formModel.pic) {
+        data.append("file", this.imgSrc);
+      }
+      this.customerService.postCustomer(data).subscribe((res: any) => {
         this.afterSave.emit(res);
         Swal.fire({
           icon: 'success',
@@ -62,12 +73,17 @@ export class FormCustomersComponent {
         })
       })
     } else {
+      console.log(this.formModel);
       const requestDataJson = JSON.stringify(this.formModel);
       const data = new FormData();
       data.append("request", new Blob([requestDataJson], {
         type: "application/json"
       }));
+      if (this.formModel.pic) {
+        data.append("file", this.imgSrc);
+      }
       this.customerService.putCustomer(data).subscribe((res: any) => {
+        console.log(data);
         this.afterSave.emit(res);
         Swal.fire({
           icon: 'success',
@@ -76,6 +92,24 @@ export class FormCustomersComponent {
         })
       })
     }
+  }
+
+  onFileSelected(event: any) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files) {
+      return;
+    }
+    const file = input.files[0];
+    this.formModel.pic = file;
+
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.formModel.pic = e.target.result;
+    }
+    reader.readAsDataURL(file);
+
+    this.imgSrc = file;
+    console.log("aaa"+this.imgSrc);
   }
   
 

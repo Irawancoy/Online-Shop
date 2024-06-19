@@ -18,11 +18,17 @@
 <input [(ngModel)]="formModel.customerPhone" name="customerPhone" type="text" class="form-control" id="customerPhone" required>
       </div>
 
-      <!-- Customer PIC -->
-      <label class="col-md-4 required  mt-1" for="pic">PIC</label>
-      <div class="col-md-8  mt-1">
-<input [(ngModel)]="formModel.pic" name="pic" type="text" class="form-control" id="pic" required>
-      </div>
+      <!-- PIC img-->
+<div class="col-md-12 mt-1 text-center">
+      <img *ngIf="formModel.pic" [src]="formModel.pic" alt="Image Preview" class="img-thumbnail" width="200" />
+    </div>
+    
+    <!-- File input for image -->
+    <label class="col-md-4 required mt-1" for="pic">PIC</label>
+    <div class="col-md-8 mt-1">
+      <input (change)="onFileSelected($event)" type="file" class="form-control" id="pic" required>
+    </div>
+    
 
       <!-- Customer Status -->
       <label class="col-md-4 required  mt-1" for="isActive">Status</label>

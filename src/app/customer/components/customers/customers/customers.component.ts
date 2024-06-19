@@ -39,13 +39,13 @@ export class CustomersComponent {
   displayedColumns: string[] = [
     'no',
     'id',
+    'pic',
     'name',
     'address',
     'code',
     'phone',
     'isActive',
     'lastOrderDate',
-    'pic',
     'actions',
   ];
 
